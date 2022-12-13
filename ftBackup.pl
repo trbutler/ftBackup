@@ -25,11 +25,11 @@ use Config::Simple;
 use File::HomeDir;
 
 my $configurationFile;
-if (-e '/etc/ftBackup') {
-	$configurationFile = "/etc/ftBackup";
-}
-elsif (-e File::HomeDir->my_home . ".ftBackup") {
+if (-e File::HomeDir->my_home . ".ftBackup") {
 	$configurationFile = File::HomeDir->my_home . ".ftBackup";
+}
+elsif (-e '/etc/ftBackup') {
+	$configurationFile = "/etc/ftBackup";
 }
 elsif (-e 'ftBackup.conf')
 	$configurationFile = 'ftBackup.conf';
@@ -38,6 +38,7 @@ else {
 	die "No configuration file found.";
 }
 
+my %config;
 Config::Simple->import_from($configurationFile, \%config);
 
 ### Configuration
@@ -86,7 +87,7 @@ foreach my $target (@files) {
 	my $file = $backupTarget . $target;
 	print 'Backing up ' . $file . '...';
 	`tar -czf $file.tar.gz $file > /dev/null 2>&1`;
-	$s3Bucket->add_key_filename($backupPath . '/daily/' . $sortedDirectories[0] . '/' . $target . '.tar.gz', $file . '.tar.gz') or die "Failed to delete object: $!";
+	$s3Bucket->add_key_filename($file . '.tar.gz', $backupPath . '/daily/' . $sortedDirectories[0] . '/' . $target . '.tar.gz') or die "Failed to upload object: $!";
 	print "Done.\n";
 	unlink $file . '.tar.gz';
 }
