@@ -6,7 +6,7 @@ Download the code:
 
     git clone git@github.com:trbutler/ftBackup.git
 
-Edit the default configuration file ('ftBackup.conf') with your Amazon S3 credentials. Other settings in this file are commented for explanation. This file can be left in the same directory as ftBackup or can be saved as `~/.ftBackup` or `/etc/ftBackup`.
+Edit the default configuration file ('ftBackup.conf') with your Amazon S3 credentials. Other settings in this file are commented for explanation. This file can be left in the same directory as ftBackup or can be saved as `~/.ftBackup` or `/etc/ftBackup`. The version located in your home directory is given first preference, then the global `/etc/` version and, finally, the one in the present working directory.
 
 # Operation
 Simply run `perl ftBackup.pl`.
