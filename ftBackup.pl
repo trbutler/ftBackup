@@ -31,7 +31,7 @@ if (-e File::HomeDir->my_home . ".ftBackup") {
 elsif (-e '/etc/ftBackup') {
 	$configurationFile = "/etc/ftBackup";
 }
-elsif (-e 'ftBackup.conf')
+elsif (-e 'ftBackup.conf') {
 	$configurationFile = 'ftBackup.conf';
 }
 else {
