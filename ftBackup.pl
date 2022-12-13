@@ -18,6 +18,7 @@
 
 use v5.12;
 use warnings;
+use Net::Amazon::S3;
  
 # Load Configuration 
 use Config::Simple;
@@ -39,18 +40,16 @@ else {
 
 Config::Simple->import_from($configurationFile, \%config);
 
-use Net::Amazon::S3;
-
 ### Configuration
 
 # cPanel Backup Path
-my $backupPath = '/backup';
+my $backupPath = $config{'backupPath'};
 
 # define your bucket name and the prefix for your backups
-our $bucketName = 'redcedarbackup';
+our $bucketName = $config{'bucketName'};
 
 # Number of daily backups to retain
-our $retainBackups = 3;
+our $retainBackups = $config{'retainBackups'};
 
 ### End of Configuration
 
