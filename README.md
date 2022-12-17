@@ -29,7 +29,7 @@ If you would like to register it with cPanel's hook manager manually, rather tha
 	/usr/local/cpanel/bin/manage_hooks add script /path/to/ftBackup.pl --manual --category=System --event=Backup --stage=post
 	
 # Appreciate the Script?
-If this script is useful to you and you'd like to say thank you, sending a couple bucks to @faithtree on Venmo or timothy.butler@faithtree.com on PayPal. Anything you send will be tax deductible in the United States as a gift to FaithTree Christian Fellowship, Inc., an IRS 501(c)(3) charity.
+If this script is useful to you and you'd like to say thank you, sending a couple bucks to @faithtree on Venmo or timothy.butler@faithtree.com on PayPal is much appreciated. Anything you send will be tax deductible in the United States as a gift to FaithTree Christian Fellowship, Inc., an IRS 501(c)(3) charity.
 
 # About
-This tool is copyright (c) 2022 Universal Networks, LLC. Check out our friends at [FaithTree.com](https://faithtree.com) and [OFB.biz - Open for Business](https://ofb.biz).
+This tool is copyright (c) 2022 Universal Networks, LLC. and provided under the terms of the GNU GPL v. 2.0 or greater. The work is sponsored by [FaithTree.com](https://faithtree.com) and [OFB.biz - Open for Business](https://ofb.biz).
