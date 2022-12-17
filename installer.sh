@@ -5,9 +5,9 @@ mkdir /var/cpanel/perl5/lib/FaithTree/Backup
 cp FaithTree/Backup.pm /var/cpanel/perl5/lib/FaithTree/
 cp FaithTree/Backup/Logger.pm /var/cpanel/perl5/lib/FaithTree/Backup/
 cp ftBackup.pl /var/cpanel/perl5/lib/
-ln -s /usr/local/bin/ftBackup /var/cpanel/perl5/lib/ftBackup.pl
-chmod 700 /usr/local/bin/ftBackup
+ln -s /var/cpanel/perl5/lib/ftBackup.pl /usr/local/bin/ftBackup 
+chmod 700 /var/cpanel/perl5/lib/ftBackup.pl
 cpan Net::Amazon::S3
 cpan Term::ProgressBar
-/usr/local/cpanel/bin/manage_hooks add module FaithTree::Backup
+/usr/local/cpanel/bin/manage_hooks add script /var/cpanel/perl5/lib/ftBackup.pl
  
