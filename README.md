@@ -11,6 +11,13 @@ Edit the default configuration file ('ftBackup.conf') with your Amazon S3 creden
 # Operation
 Simply run `perl ftBackup.pl`.
 
+# Automated Installation.
+This script can be installed to be run after cPanel completes its daily backup task. It is designed to
+assume that cPanel will be producing incremental (uncompressed) backups and then to compress and
+transfer those. To have it run after cPanel finishes each day, you can use the cPanel hook manager:
+
+	/usr/local/bin/ftBackup.pl
+
 # Warning Before Use
 Backups of a cPanel server are, needless to say, incredibly important in most cases. This tool comes with absolutely no warranty and is provided to use at your own risk. Always check to make sure the backups are being uploaded successfully using another tool, such as the S3 console, rather than simply assuming this tool is working.
 
