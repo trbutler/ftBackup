@@ -72,6 +72,24 @@ our $cpanelMode = ($testForCpanel) ? 1 : 0;
         return $self->decoded_content && $self->decoded_content =~ /^\Q<?xml\E/;
 };
 
+
+### Load Configuration
+
+my %config;
+Config::Simple->import_from($configurationFile, \%config);
+
+# cPanel Backup Path
+my $backupPath = $config{'backupPath'};
+
+# define your bucket name and the prefix for your backups
+our $bucketName = $config{'bucketName'};
+
+# Number of daily backups to retain
+our $retainBackups = $config{'retainBackups'};
+
+our ($s3, $s3Bucket, $simpleS3);
+
+
 # Are we running as a script or as a module?
 InitiateBackup() unless caller;
  
@@ -109,20 +127,6 @@ sub InitiateBackup {
 		die "No configuration file found.";
 	}
 
-	my %config;
-	Config::Simple->import_from($configurationFile, \%config);
-
-	### Configuration
-
-	# cPanel Backup Path
-	my $backupPath = $config{'backupPath'};
-
-	# define your bucket name and the prefix for your backups
-	our $bucketName = $config{'bucketName'};
-
-	# Number of daily backups to retain
-	our $retainBackups = $config{'retainBackups'};
-
 	say STDOUT 'FaithTree.com cPanel Incremental to S3 Backup Tool';
 	say STDOUT 'Sponsored by FaithTree.com -- please check us out!';
 	say STDOUT 'Copyright (C) 2022 Universal Networks, LLC';
@@ -132,16 +136,16 @@ sub InitiateBackup {
 	# create our S3 clients
 	# We use Net::Amazon::S3 for most operations since it supports copying.
 	# However, its multipart support is buggy and we use Amazon::S3 for that.
-
-	our $s3 = Net::Amazon::S3->new({
+	
+	$s3 = Net::Amazon::S3->new({
 			aws_access_key_id  => $config{'access_key_id'},
 			aws_secret_access_key => $config{'access_key'},
 			retry => 1
 		});
 	
-	our $s3Bucket = $s3->bucket($bucketName);
+	$s3Bucket = $s3->bucket($bucketName);
 	
-	our $simpleS3 = Amazon::S3->new({
+	$simpleS3 = Amazon::S3->new({
 			aws_access_key_id  => $config{'access_key_id'},
 			aws_secret_access_key => $config{'access_key'},
 			retry => 1
