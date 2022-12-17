@@ -9,5 +9,5 @@ ln -s /var/cpanel/perl5/lib/ftBackup.pl /usr/local/bin/ftBackup
 chmod 700 /var/cpanel/perl5/lib/ftBackup.pl
 cpan Net::Amazon::S3
 cpan Term::ProgressBar
-/usr/local/cpanel/bin/manage_hooks add script /var/cpanel/perl5/lib/ftBackup.pl
+/usr/local/cpanel/bin/manage_hooks add script /var/cpanel/perl5/lib/ftBackup.pl --manual --category=System --event=Backup --stage=post
  
