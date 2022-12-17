@@ -21,7 +21,6 @@ package FaithTree::Backup;
 use v5.12;
 use warnings;
 use POSIX;
-use Term::ProgressBar;
 use threads;
 use threads::shared;
 use Thread::Queue;
@@ -38,6 +37,7 @@ my $testForCpanel = eval {
 
 unless ($testForCpanel) {
 	require FaithTree::Backup::Logger;
+	require Term::ProgressBar;
 	$logger = FaithTree::Backup::Logger->new();
 }
 
@@ -191,10 +191,8 @@ sub InitiateBackup {
 		my $queue = Thread::Queue->new(@queueData);
 
 		# Setup Progress Bar
-		my $progress = Term::ProgressBar->new({name  => $target,
-											   count => $parts,
-											   ETA   => 'linear', 
-											   remove => 1 });
+		my $progress;
+		my $progress = Term::ProgressBar->new({name  => $target, count => $parts, ETA   => 'linear', remove => 1 }) unless ($cpanelMode);
 
 		# Initiate upload.
 		my $bucket = $simpleS3->bucket($bucketName); 
@@ -246,8 +244,7 @@ sub InitiateBackup {
 
 					#Advance Progress Bar
 					$overallProgress++;			
-					$progress->update($overallProgress);
-					$progress->message( 'Number: ' . $i);
+					$progress->update($overallProgress) unless ($cpanelMode);
 				}
 			
 				# Close file handle for thread.
