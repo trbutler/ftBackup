@@ -32,11 +32,12 @@ use Amazon::S3;
 # Are we operating as a hook for cPanel?
 my $logger;
 my $testForCpanel = eval { 
-	use Cpanel::Logger;	
+	require Cpanel::Logger;	
 	$logger = Cpanel::Logger->new();
-}
-else {
-	use FaithTree::Backup::Logger;
+};
+
+unless ($testForCpanel) {
+	require FaithTree::Backup::Logger;
 	$logger = FaithTree::Backup::Logger->new();
 }
 
