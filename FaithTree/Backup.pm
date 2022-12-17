@@ -73,7 +73,23 @@ our $cpanelMode = ($testForCpanel) ? 1 : 0;
 };
 
 
-### Load Configuration
+### Load Configuration 
+use Config::Simple;
+use File::HomeDir;
+
+my $configurationFile;
+if (-e File::HomeDir->my_home . "/.ftBackup") {
+	$configurationFile = File::HomeDir->my_home . "/.ftBackup";
+}
+elsif (-e '/etc/ftBackup') {
+	$configurationFile = "/etc/ftBackup";
+}
+elsif (-e 'ftBackup.conf') {
+	$configurationFile = 'ftBackup.conf';
+}
+else {
+	die "No configuration file found.";
+}
 
 my %config;
 Config::Simple->import_from($configurationFile, \%config);
@@ -93,6 +109,7 @@ our ($s3, $s3Bucket, $simpleS3);
 # Are we running as a script or as a module?
 InitiateBackup() unless caller;
  
+### Subroutines
 # Set up hook for cPanel usage
 sub describe {
     my $hooks = [
@@ -109,24 +126,6 @@ sub describe {
 
 # Core Program Logic
 sub InitiateBackup {
-	# Load Configuration 
-	use Config::Simple;
-	use File::HomeDir;
-
-	my $configurationFile;
-	if (-e File::HomeDir->my_home . "/.ftBackup") {
-		$configurationFile = File::HomeDir->my_home . "/.ftBackup";
-	}
-	elsif (-e '/etc/ftBackup') {
-		$configurationFile = "/etc/ftBackup";
-	}
-	elsif (-e 'ftBackup.conf') {
-		$configurationFile = 'ftBackup.conf';
-	}
-	else {
-		die "No configuration file found.";
-	}
-
 	say STDOUT 'FaithTree.com cPanel Incremental to S3 Backup Tool';
 	say STDOUT 'Sponsored by FaithTree.com -- please check us out!';
 	say STDOUT 'Copyright (C) 2022 Universal Networks, LLC';
