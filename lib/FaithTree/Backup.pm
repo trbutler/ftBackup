@@ -16,7 +16,7 @@
 # 	copy of the GNU General Public License along with this program. If not,
 # 	see <https://www.gnu.org/licenses/>.
 
-package FaithTree::Backup;
+package FaithTree::Backup 1.0.0;
 
 use v5.12;
 use warnings;
@@ -26,8 +26,6 @@ use threads::shared;
 use Thread::Queue;
 use Net::Amazon::S3;
 use Amazon::S3;
-
-our $VERSION='1.0.0-beta.1';
 
 # Are we operating as a hook for cPanel?
 my $logger;
