@@ -39,6 +39,6 @@ sub MY::postamble {
     return <<'MAKE_FRAG';
 install ::
 		echo 'Registering with cPanel...'
- 		/usr/local/cpanel/bin/manage_hooks add script $INSTALLBIN/ftBackup --manual --category=System --event=Backup --stage=post
+		/usr/local/cpanel/bin/manage_hooks add script $INSTALLBIN/ftBackup --manual --category=System --event=Backup --stage=post
 MAKE_FRAG
 }
