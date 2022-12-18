@@ -190,7 +190,6 @@ sub InitiateBackup {
 		my $queue = Thread::Queue->new(@queueData);
 
 		# Setup Progress Bar
-		my $progress;
 		my $progress = Term::ProgressBar->new({name  => $target, count => $parts, ETA   => 'linear', remove => 1 }) unless ($cpanelMode);
 
 		# Initiate upload.
