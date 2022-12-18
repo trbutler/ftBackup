@@ -16,7 +16,7 @@
 # 	copy of the GNU General Public License along with this program. If not,
 # 	see <https://www.gnu.org/licenses/>.
 
-package FaithTree::Backup 1.0.0;
+package FaithTree::Backup v1.0.0;
 
 use v5.12;
 use warnings;
