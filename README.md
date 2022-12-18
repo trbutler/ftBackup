@@ -6,7 +6,7 @@ Download the code:
 
     git clone git@github.com:trbutler/ftBackup.git
 
-You can run `./installer.sh` within the newly downloaded repository to install the program on a cPanel server and register it to run after the cPanel backup process. If you intend to use it on a non-cPanel server, simply place the repository itself wherever you would like to store the program and run it from there.
+From there, the standard UNIX build process is the ideal way to install FaithTree::Backup. You can run `./installer.sh` within the newly downloaded repository as a shortcut to do accomplish this. If you intend to use it on a non-cPanel server, the final step of the installation will report an error, but this can be ignored.
 
 # Configuration
 Edit the default configuration file ('ftBackup.conf') with your Amazon S3 credentials. Other settings in this file are commented for explanation. This file can be left in the same directory as ftBackup or can be saved as `~/.ftBackup` or `/etc/ftBackup`. The version located in your home directory is given first preference, then the global `/etc/` version and, finally, the one in the present working directory.
