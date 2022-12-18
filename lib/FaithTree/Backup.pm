@@ -24,9 +24,10 @@ use POSIX;
 use threads;
 use threads::shared;
 use Thread::Queue;
-use HTTP::Request::Common; 
 use Net::Amazon::S3;
 use Amazon::S3;
+
+our $VERSION='1.0.0-beta.1';
 
 # Are we operating as a hook for cPanel?
 my $logger;
