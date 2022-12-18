@@ -1,0 +1,10 @@
+bin/ftBackup
+ftBackup.conf
+installer.sh
+lib/FaithTree/Backup.pm
+lib/FaithTree/Backup/Logger.pm
+LICENSE
+Makefile.PL
+MANIFEST			This list of files
+README.md
+text.txt
